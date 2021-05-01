@@ -18,6 +18,7 @@ public class ListVisitor extends Visitor{
 			Entry entry = (Entry)it.next();
 			entry.accept(this);
 		}
+		
 		currentdir = savedir;
 	}
 	

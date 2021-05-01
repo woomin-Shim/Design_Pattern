@@ -19,7 +19,9 @@ public class Directory extends Entry{
 		}
 		return size;
 	}
-	public Entry add(Entry entry) {
+	
+	//Entry를 상속받은 File, Directory를 인자로 받을 수 있음 
+	public Entry add(Entry entry) {  
 		dir.add(entry);
 		return this;
 	}

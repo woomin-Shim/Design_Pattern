@@ -1,26 +1,20 @@
+import java.util.Iterator;
 
 public class Main {
 	public static void main(String[] args) { 
 		try {
-			System.out.println("Making root entries...");
 			Directory rootdir = new Directory("root");
 			Directory bindir = new Directory("bin");
 			Directory tmpdir = new Directory("tmp");
 			Directory usrdir = new Directory("usr");
 			
-			//Add to Directory(rootdir) ArrayList
 			rootdir.add(bindir);
 			rootdir.add(tmpdir);
 			rootdir.add(usrdir);
 			
-			bindir.add(new File("vi",1000));
+			bindir.add(new File("vi",10000));
 			bindir.add(new File("latex", 20000));
 			
-			//directory 내용을 표시하기 위해, ListVisiton instance 사용 
-			rootdir.accept(new ListVisitor());
-			
-			System.out.println("");
-			System.out.println("Making user entries...");
 			Directory Kim = new Directory("Kim");
 			Directory Lee = new Directory("Lee");
 			Directory Park = new Directory("Park");
@@ -29,10 +23,22 @@ public class Main {
 			usrdir.add(Park);
 			Kim.add(new File("diary.html",100));
 			Kim.add(new File("composite.java",200));
+			Kim.add(new File("hyejaKim.txt", 700));
 			Lee.add(new File("memo.tex", 300));
+			Lee.add(new File("hyejaKim.txt", 700));
 			Park.add(new File("game.doc", 400));
 			Park.add(new File("juck.mail", 500));
-			rootdir.accept(new ListVisitor());
+			Park.add(new File("hyejaKim.txt", 700));
+			 	
+			FileNameFindVisitor fnfv = new FileNameFindVisitor("hyeja");
+			rootdir.accept(fnfv);  //ListVisitor instance를 사용하지 않고 FileNameFindVisitor를 사용
+			
+			System.out.println("hyeja files are");
+			Iterator it = fnfv.getFoundFiles();
+			while(it.hasNext()) {
+				File file = (File)it.next();
+				System.out.println(file.toString());
+			}
 		}catch(FileTreatmentException e) {
 			e.printStackTrace();
 		}
