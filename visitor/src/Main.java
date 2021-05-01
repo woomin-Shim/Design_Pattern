@@ -29,6 +29,7 @@ public class Main {
 			Park.add(new File("game.doc", 400));
 			Park.add(new File("juck.mail", 500));
 			Park.add(new File("hyejaKim.txt", 700));
+			rootdir.accept(new ListVisitor());
 			 	
 			FileNameFindVisitor fnfv = new FileNameFindVisitor("hyeja");
 			rootdir.accept(fnfv);  //ListVisitor instance를 사용하지 않고 FileNameFindVisitor를 사용
